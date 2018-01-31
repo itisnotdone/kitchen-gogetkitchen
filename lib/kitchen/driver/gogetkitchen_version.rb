@@ -21,6 +21,6 @@ module Kitchen
   module Driver
 
     # Version string for Gogetkitchen Kitchen driver
-    GOGETKITCHEN_VERSION = "0.2.1"
+    GOGETKITCHEN_VERSION = "0.2.2"
   end
 end
