@@ -1,16 +1,10 @@
-# <a name="title"></a> Kitchen::Gogetkitchen
+# <a name="title"></a> Gogetkitchen
 
 A test kitchen driver for [Gogetit](https://github.com/itisnotdone/gogetit).
+Due to the [collision](https://github.com/test-kitchen/test-kitchen/blob/master/lib/kitchen/driver.rb#L38-L44) of namespace with Kitchen::Driver, it is named as Gogetkitchen not Gogetit.
 
 ## <a name="requirements"></a> Requirements
 
-**TODO:** document any software or library prerequisites that are required to
-use this driver. Implement the `#verify_dependencies` method in your Driver
-class to enforce these requirements in code, if possible.
-
-What are needed when using Gogetit library are needed as well
-Since this is devised to use Gogetit as a kitchen driver.
-Please refer following link before begin.
 https://github.com/itisnotdone/gogetit
 
 ## <a name="installation"></a> Installation and Setup

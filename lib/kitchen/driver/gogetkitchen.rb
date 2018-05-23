@@ -38,8 +38,9 @@ module Kitchen
       Gogetit.config[:consumer] = 'kitchen'
 
       def create(state)
+        options = { 'alias' => config[:template] } if config[:template]
         provider = choose_provider(config[:provider])
-        result = provider.create(instance.name)
+        result = provider.create(instance.name, options)
         domain = Gogetit.maas.get_domain
         state[:hostname]      = instance.name + '.' + domain
         state[:username]      = result[:info][:default_user]
