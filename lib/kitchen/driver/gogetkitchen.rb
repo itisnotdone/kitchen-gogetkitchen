@@ -39,6 +39,7 @@ module Kitchen
 
       def create(state)
         options = { 'alias' => config[:template] } if config[:template]
+        options.merge!(config[:options])
         provider = choose_provider(config[:provider])
         result = provider.create(instance.name, options)
         domain = Gogetit.maas.get_domain
@@ -54,6 +55,8 @@ module Kitchen
       end
 
       def destroy(state)
+        options = {}
+        options.merge!(config[:options])
         provider = choose_provider(config[:provider])
         provider.destroy(instance.name)
 

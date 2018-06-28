@@ -15,7 +15,7 @@ Please read the [Driver usage][driver_usage] page for more details.
 
 $ export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
 
-$ kitchen init -D kitchen-gogetkitchen -P chef_zero
+$ gem install kitchen-gogetkitchen
 
 ```
 ## <a name="config"></a> Configuration
@@ -37,10 +37,14 @@ platforms:
     driver:
       provider: lxd
       template: default
+      options:
+        maas-on-lxc: true
   - name: kvm01
     driver:
       provider: libvirt
       template: default
+      options:
+        lxd-in-lxd: true
 
 suites:
   - name: default
