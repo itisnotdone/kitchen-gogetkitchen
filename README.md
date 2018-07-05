@@ -74,9 +74,9 @@ suites:
 
 ```
 ## Provider specific behaviors
-For KVM(Libvirt)
+### For KVM(Libvirt)
 - It will always use `deploy`/`release` pair once `create`d.
-For LXD
+### For LXD
 - It is able to convey `options` which Gogetit LXD provider comsumes.
 
 
