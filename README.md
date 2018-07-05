@@ -19,7 +19,7 @@ $ gem install kitchen-gogetkitchen
 
 ```
 ## <a name="config"></a> Configuration
-
+For lxd provider
 ```yaml
 
 ---
@@ -39,12 +39,6 @@ platforms:
       template: default
       options:
         maas-on-lxc: true
-  - name: kvm01
-    driver:
-      provider: libvirt
-      template: default
-      options:
-        lxd-in-lxd: true
 
 suites:
   - name: default
@@ -53,6 +47,38 @@ suites:
     attributes:
 
 ```
+
+For kvm(libvirt) provider
+```yaml
+
+---
+driver:
+  name: gogetkitchen
+
+provisioner:
+  name: chef_zero
+
+transport:
+  ssh_key: <%= Dir.home + '/.ssh/id_rsa' %>
+
+platforms:
+  - name: kvm01
+    driver:
+      provider: kvm
+
+suites:
+  - name: default
+    run_list:
+      - recipe[all_nodes::default]
+    attributes:
+
+```
+## Provider specific behaviors
+For KVM(Libvirt)
+- It will always use `deploy`/`release` pair once `create`d.
+For LXD
+- It is able to convey `options` which Gogetit LXD provider comsumes.
+
 
 ## <a name="Uninstall"></a> Uninstall
 
@@ -63,22 +89,6 @@ Please read the [Driver usage][driver_usage] page for more details.
 gem uninstall kitchen-gogetkitchen gogetit maas-client
 
 ```
-
-### <a name="config-require-chef-omnibus"></a> require\_chef\_omnibus
-
-Determines whether or not a Chef [Omnibus package][chef_omnibus_dl] will be
-installed. There are several different behaviors available:
-
-* `true` - the latest release will be installed. Subsequent converges
-  will skip re-installing if chef is present.
-* `latest` - the latest release will be installed. Subsequent converges
-  will always re-install even if chef is present.
-* `<VERSION_STRING>` (ex: `10.24.0`) - the desired version string will
-  be passed the the install.sh script. Subsequent converges will skip if
-  the installed version and the desired version match.
-* `false` or `nil` - no chef is installed.
-
-The default value is unset, or `nil`.
 
 ## <a name="development"></a> Development
 
