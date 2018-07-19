@@ -38,27 +38,19 @@ module Kitchen
       Gogetit.config[:consumer] = 'kitchen'
 
       def create(state)
-        options = {}
-
-        # for LXD
-        options['alias'] = config[:template] if config[:template]
-
-        # to receive new other options
-        options.merge!(config[:options]) if config[:options]
-
         provider = choose_provider(config[:provider])
 
         case provider
         when Gogetit::GogetLibvirt
 
           if Gogetit.maas.machine_exists?(instance.name)
-            result = provider.deploy(instance.name, options)
+            result = provider.deploy(instance.name, config)
           else
-            result = provider.create(instance.name, options)
+            result = provider.create(instance.name, config)
           end
 
         when Gogetit::GogetLXD
-          result = provider.create(instance.name, options)
+          result = provider.create(instance.name, config)
         end
 
         domain = Gogetit.maas.get_domain
@@ -91,7 +83,7 @@ module Kitchen
         when 'lxd'
           Gogetit.lxd
         when 'kvm'
-          # kvm externally but libvirt internally
+          # let's call it kvm externally but libvirt internally
           # because gogetit actually handles libvirtd
           Gogetit.libvirt
         end

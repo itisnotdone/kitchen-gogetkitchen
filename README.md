@@ -36,9 +36,8 @@ platforms:
   - name: lxc01
     driver:
       provider: lxd
-      template: default
-      options:
-        maas-on-lxc: true
+      alias: default
+      maas-on-lxc: true
 
 suites:
   - name: default
@@ -65,6 +64,7 @@ platforms:
   - name: kvm01
     driver:
       provider: kvm
+      distro: bionic
 
 suites:
   - name: default
